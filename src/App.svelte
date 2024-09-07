@@ -17,14 +17,6 @@
 </main>
 
 <style>
-  :global(body) {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: block;
-  }
   section {
     padding: 20px;
   }
