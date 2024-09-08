@@ -20,7 +20,7 @@
         position: fixed;
         top: 0;
         width: 100%;
-        background: rgba(255, 255, 255, 0.8);
+        background-color: rgba(117, 55, 66, 0.8);
         padding: 10px;
         margin: 0;
         z-index: 1000;
@@ -32,12 +32,12 @@
 
     nav ul li a {
         text-decoration: none;
-        color: #333;
+        color: #fff;
         font-weight: bold;
         cursor: pointer;
     }
 
     nav ul li a:hover {
-        color: #007bff;
+        color: #dfdddd;
     }
 </style>
