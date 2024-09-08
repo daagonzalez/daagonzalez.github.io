@@ -1,13 +1,19 @@
+<script>
+    import {scrollTo} from 'svelte-scrolling';
+</script>
 <nav>
     <ul>
         <li>
-            <a href="#home"> Home </a>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a use:scrollTo={'home'}> Home </a>
         </li>
         <li>
-            <a href="#projects"> Projects </a>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a use:scrollTo={'projects'}> Projects </a>
         </li>
         <li>
-            <a href="#contact"> Contact </a>
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a use:scrollTo={'contact'}> Contact </a>
         </li>
     </ul>
 </nav>
