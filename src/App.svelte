@@ -18,7 +18,7 @@
   <Navbar />
   {#each sections as { component: SectionComponent, ref }}
     <section
-      class="h-screen flex justify-center items-center text-center"
+      class="h-screen flex justify-center items-center text-center flex-col md:flex-row"
       use:scrollRef={ref}
     >
       <SectionComponent />

@@ -10,10 +10,10 @@
 
 <nav>
     <ul
-        class="list-none flex justify-center fixed top-0 w-full bg-red-900/80 p-2.5 m-0 z-50"
+        class="list-none flex flex-col md:flex-row justify-center fixed top-0 w-full bg-red-900/80 p-2.5 m-0 z-50"
     >
         {#each navItems as item}
-            <li class="mx-4 my-0">
+            <li class="mx-4 my-2 md:my-0">
                 <!-- svelte-ignore a11y-missing-attribute -->
                 <a
                     class="text-white hover:text-black font-bold cursor-pointer no-underline"
