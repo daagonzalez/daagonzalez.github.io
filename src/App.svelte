@@ -11,7 +11,7 @@
   <Navbar />
   <section use:scrollRef={"home"} class="section">
     <div>
-      <h2>About Me</h2>
+      <h1 class="text-3xl font-bold">About Me</h1>
     </div>
     <div>
       <p>
@@ -39,6 +39,5 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* flex-direction: column; */
   }
 </style>
