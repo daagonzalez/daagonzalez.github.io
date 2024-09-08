@@ -50,18 +50,18 @@
             class:hidden={!menuOpen}
         >
             {#each navItems as item}
-            <li class="my-0">
-                <!-- svelte-ignore a11y-missing-attribute -->
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <a
-                    class="text-white hover:text-black font-bold cursor-pointer no-underline"
-                    use:scrollTo={item.target}
-                    on:click={() => (menuOpen = false)}
-                >
-                    {item.name}
-                </a>
-            </li>
+                <li class="my-0">
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <!-- svelte-ignore a11y-no-static-element-interactions -->
+                    <a
+                        class="text-white hover:text-black font-bold cursor-pointer no-underline"
+                        use:scrollTo={item.target}
+                        on:click={() => (menuOpen = false)}
+                    >
+                        {item.name}
+                    </a>
+                </li>
             {/each}
         </ul>
     </div>
