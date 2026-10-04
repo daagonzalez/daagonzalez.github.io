@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: confirm these are the addresses you want public
+const channels = [
+  { label: 'Email', value: 'hello@daagonzalez.com', href: 'mailto:hello@daagonzalez.com' },
+  { label: 'GitHub', value: 'github.com/daagonzalez', href: 'https://github.com/daagonzalez' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/daagonzalez', href: 'https://www.linkedin.com/in/daagonzalez' },
+];
+---
+
+<BaseLayout current="contact" title="Contact" description="Get in touch with Daniel Gonzalez.">
+  <section class="section">
+    <h1>Contact</h1>
+    <p class="lede">
+      The best way to reach me is email. I'm open to new roles, collaborations, and interesting
+      problems.
+    </p>
+  </section>
+
+  <section class="section" aria-label="Contact channels">
+    <dl class="channels">
+      {
+        channels.map((c) => (
+          <div>
+            <dt class="meta">{c.label}</dt>
+            <dd>
+              <a href={c.href}>{c.value}</a>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .channels {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .channels > div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .channels > div:last-child {
+    border-bottom: 0;
+  }
+
+  .channels dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+</style>

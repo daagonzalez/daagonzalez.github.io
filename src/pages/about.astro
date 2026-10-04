@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout current="about" title="About" description="About Daniel Gonzalez.">
+  <section class="section">
+    <h1>About</h1>
+  </section>
+
+  <!-- TODO: replace placeholder copy with your own background and interests -->
+  <section class="section prose">
+    <p>
+      Hello! I'm Daniel Gonzalez, a software engineer with a knack for developing solutions to
+      complex problems. With a strong foundation in software development and a love for learning
+      new technologies, I try to build software that makes a real difference to the people using
+      it.
+    </p>
+    <h2>How I got here</h2>
+    <p>
+      A short paragraph on how you got into development — the first thing you built, the moment
+      it clicked, or the path that led you to engineering.
+    </p>
+    <h2>What I'm into</h2>
+    <p>
+      The technical areas you keep coming back to: distributed systems, developer tooling,
+      frontend architecture, whatever it is you'd happily talk about for an hour.
+    </p>
+    <h2>Outside of work</h2>
+    <p>A line or two of personality — hobbies, what you're reading, what you're learning next.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 {
+    font-size: 1.05rem;
+  }
+</style>

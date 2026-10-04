@@ -1,0 +1,77 @@
+---
+import Rail, { type Page } from '../components/Rail.astro';
+import '../styles/global.css';
+
+interface Props {
+  current: Page;
+  title?: string;
+  description?: string;
+}
+
+const {
+  current,
+  title,
+  description = 'Daniel Gonzalez — software engineer. Projects, resume, and contact.',
+} = Astro.props;
+
+const fullTitle = title ? `${title} · Daniel Gonzalez` : 'Daniel Gonzalez · Software Engineer';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#14171C" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="shell">
+      <Rail current={current} />
+      <main id="main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style>
+  .shell {
+    display: grid;
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    min-height: 100vh;
+  }
+
+  main {
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem) 4rem;
+    max-width: 60rem;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 10;
+    padding: 0.5rem 0.75rem;
+    background: var(--color-surface);
+    color: var(--color-accent);
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  @media (max-width: 720px) {
+    .shell {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    main {
+      padding: 2rem 1.25rem 3rem;
+    }
+  }
+</style>

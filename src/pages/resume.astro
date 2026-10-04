@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// TODO: replace placeholder entries with real experience
+const experience = [
+  {
+    role: 'Software Engineer',
+    company: 'Company Name',
+    dates: '2022 — Present',
+    points: [
+      'Impact-focused bullet: what you built and the result it had.',
+      'Another accomplishment, ideally with a number attached.',
+    ],
+  },
+  {
+    role: 'Junior Software Engineer',
+    company: 'Previous Company',
+    dates: '2020 — 2022',
+    points: ['What you owned and what changed because of it.'],
+  },
+];
+
+const skills = [
+  { group: 'Languages', items: ['TypeScript', 'JavaScript', 'Java', 'SQL'] },
+  { group: 'Frameworks', items: ['Angular', 'Svelte', 'Astro', 'Node.js'] },
+  { group: 'Infrastructure', items: ['Kafka', 'PostgreSQL', 'Docker', 'GitHub Actions'] },
+];
+
+const education = [{ degree: 'B.S. Computer Science', school: 'University Name', dates: '2016 — 2020' }];
+---
+
+<BaseLayout current="resume" title="Resume" description="Resume of Daniel Gonzalez, software engineer.">
+  <section class="section">
+    <h1>Resume</h1>
+    <p class="lede">Experience and skills at a glance. The PDF has the full version.</p>
+    <a class="button" href="/resume.pdf" download>Download PDF</a>
+  </section>
+
+  <section class="section" aria-labelledby="exp-heading">
+    <h2 class="label" id="exp-heading">Experience</h2>
+    <ul class="entries">
+      {
+        experience.map((job) => (
+          <li>
+            <div class="entry-head">
+              <h3>
+                {job.role} <span class="at">· {job.company}</span>
+              </h3>
+              <span class="meta">{job.dates}</span>
+            </div>
+            <ul class="points">
+              {job.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="skills-heading">
+    <h2 class="label" id="skills-heading">Skills</h2>
+    <dl class="skills">
+      {
+        skills.map((s) => (
+          <div>
+            <dt class="meta">{s.group}</dt>
+            <dd>
+              <ul class="tags">
+                {s.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="section" aria-labelledby="edu-heading">
+    <h2 class="label" id="edu-heading">Education</h2>
+    <ul class="entries">
+      {
+        education.map((e) => (
+          <li>
+            <div class="entry-head">
+              <h3>
+                {e.degree} <span class="at">· {e.school}</span>
+              </h3>
+              <span class="meta">{e.dates}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .entries {
+    list-style: none;
+  }
+
+  .entries > li {
+    padding-block: 1rem;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .entries > li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+  }
+
+  .at {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .points {
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+    max-width: var(--measure);
+    color: var(--color-text-faint);
+  }
+
+  .skills {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .skills > div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .skills dd {
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .skills > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

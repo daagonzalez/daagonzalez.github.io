@@ -1,0 +1,61 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { title, summary, stack, link, repo } = project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout current="projects" title={title} description={summary}>
+  <section class="section">
+    <p class="crumb"><a class="arrow-link" href="/projects/">← Projects</a></p>
+    <h1>{title}</h1>
+    <p class="lede">{summary}</p>
+    <ul class="tags" aria-label="Stack">
+      {stack.map((tag) => <li>{tag}</li>)}
+    </ul>
+    {
+      (link || repo) && (
+        <p class="links">
+          {link && <a class="button" href={link}>Live demo</a>}
+          {repo && <a class="button" href={repo}>Source</a>}
+        </p>
+      )
+    }
+  </section>
+
+  <article class="section prose">
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .crumb {
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .prose > :global(h2:first-child) {
+    margin-top: 0;
+  }
+</style>
