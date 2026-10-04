@@ -1,32 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// TODO: replace placeholder entries with real experience
 const experience = [
   {
-    role: 'Software Engineer',
-    company: 'Company Name',
-    dates: '2022 — Present',
+    role: 'Software Engineering Manager',
+    company: 'Veterans United Home Loans',
+    dates: 'Oct 2024 — Present',
     points: [
-      'Impact-focused bullet: what you built and the result it had.',
-      'Another accomplishment, ideally with a number attached.',
+      'Mentored 9 engineers across engineering and management roles, and took part in hiring and technical evaluation.',
+      'Built domain-specific Angular libraries and generators in an Nx monorepo, giving teams shared patterns and less setup for each new app.',
+      'Contributed to moving CI/CD from Azure DevOps to GitHub and Octopus Deploy.',
     ],
   },
   {
-    role: 'Junior Software Engineer',
-    company: 'Previous Company',
-    dates: '2020 — 2022',
-    points: ['What you owned and what changed because of it.'],
+    role: 'Software Engineer',
+    company: 'Veterans United Home Loans',
+    dates: 'Apr 2020 — Oct 2024',
+    points: [
+      'Migrated 6 applications from .NET Framework to .NET Core and 3 from VMs to Kubernetes, including APIs and RabbitMQ-based Windows services.',
+      'Acted as unofficial technical lead on a Realty Domain API built with Domain-Driven Design and domain events, so downstream systems handle side effects independently.',
+      'Built distributed integrations on RabbitMQ and SignalR, including orchestration services and workflow processors.',
+    ],
+  },
+  {
+    role: 'Full-Stack Developer',
+    company: 'DAC Solutions',
+    dates: 'Jan 2018 — Apr 2020',
+    points: [
+      'Helped design and build a route and inventory app for truck drivers with its first user, then grew it into a product used by more customers.',
+      'Built it with Node.js, Express, AngularJS and MySQL, deployed it on AWS, and shipped an Android build with Cordova.',
+    ],
   },
 ];
 
 const skills = [
-  { group: 'Languages', items: ['TypeScript', 'JavaScript', 'Java', 'SQL'] },
-  { group: 'Frameworks', items: ['Angular', 'Svelte', 'Astro', 'Node.js'] },
-  { group: 'Infrastructure', items: ['Kafka', 'PostgreSQL', 'Docker', 'GitHub Actions'] },
+  { group: 'Languages', items: ['C#', 'TypeScript', 'JavaScript', 'SQL'] },
+  { group: 'Frameworks', items: ['.NET', 'Angular', 'RxJS', 'NgRx', 'Node.js', 'Express'] },
+  { group: 'Architecture', items: ['Domain-Driven Design', 'Clean Architecture', 'Event-Driven Architecture', 'REST APIs'] },
+  { group: 'Messaging', items: ['RabbitMQ', 'SignalR', 'Camunda', 'Twilio'] },
+  { group: 'Infrastructure', items: ['Kubernetes', 'Docker', 'AWS', 'Azure DevOps', 'GitHub', 'Octopus Deploy', 'Nx'] },
+  { group: 'Data', items: ['SQL Server', 'MySQL', 'Redis'] },
 ];
 
-const education = [{ degree: 'B.S. Computer Science', school: 'University Name', dates: '2016 — 2020' }];
+const education = [{ degree: 'B.S. Computer Science', school: 'University of Costa Rica', dates: '2018' }];
 ---
 
 <BaseLayout current="resume" title="Resume" description="Resume of Daniel Gonzalez, software engineer.">
