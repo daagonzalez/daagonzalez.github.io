@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-z4jru4n3><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A digital bullet journal for quarterly goals, monthly habits, weekly goals, and journaling, with a C# API and a React front end."><meta name="theme-color" content="#14171C"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://daagonzalez.com/projects/planner-app/"><title>Planner App · Daniel Gonzalez</title><style>.crumb[data-astro-cid-5hz3dbe4]{margin-bottom:1.25rem}h1[data-astro-cid-5hz3dbe4]{margin-bottom:.75rem}.links[data-astro-cid-5hz3dbe4]{flex-wrap:wrap;gap:.75rem;margin:1.5rem 0 0;display:flex}.prose[data-astro-cid-5hz3dbe4]>h2:first-child{margin-top:0}
+</style><link rel="stylesheet" href="/_astro/BaseLayout.-Y0Qa-N8.css"></head><body data-astro-cid-z4jru4n3><a class="skip-link" href="#main" data-astro-cid-z4jru4n3>Skip to content</a><div class="shell" data-astro-cid-z4jru4n3><header class="rail" data-astro-cid-euxwtxot><a class="identity" href="/" data-astro-cid-euxwtxot><span class="name" data-astro-cid-euxwtxot>Daniel Gonzalez</span><span class="role" data-astro-cid-euxwtxot>Software Engineer</span></a><nav aria-label="Primary" data-astro-cid-euxwtxot><ul data-astro-cid-euxwtxot><li data-astro-cid-euxwtxot><a href="/" data-astro-cid-euxwtxot>Home</a></li><li data-astro-cid-euxwtxot><a href="/projects/" aria-current="page" data-astro-cid-euxwtxot>Projects</a></li><li data-astro-cid-euxwtxot><a href="/about/" data-astro-cid-euxwtxot>About</a></li><li data-astro-cid-euxwtxot><a href="/resume/" data-astro-cid-euxwtxot>Resume</a></li><li data-astro-cid-euxwtxot><a href="/contact/" data-astro-cid-euxwtxot>Contact</a></li></ul></nav></header><main id="main" data-astro-cid-z4jru4n3><section class="section" data-astro-cid-5hz3dbe4><p class="crumb" data-astro-cid-5hz3dbe4><a class="arrow-link" href="/projects/" data-astro-cid-5hz3dbe4>← Projects</a></p><h1 data-astro-cid-5hz3dbe4>Planner App</h1><p class="lede" data-astro-cid-5hz3dbe4>A digital bullet journal for quarterly goals, monthly habits, weekly goals, and journaling, with a C# API and a React front end.</p><ul class="tags" aria-label="Stack" data-astro-cid-5hz3dbe4><li data-astro-cid-5hz3dbe4>C#</li><li data-astro-cid-5hz3dbe4>.NET</li><li data-astro-cid-5hz3dbe4>React</li><li data-astro-cid-5hz3dbe4>TypeScript</li><li data-astro-cid-5hz3dbe4>PostgreSQL</li><li data-astro-cid-5hz3dbe4>Vault</li><li data-astro-cid-5hz3dbe4>Docker</li></ul></section><article class="section prose" data-astro-cid-5hz3dbe4><h2 id="what-it-is">What it is</h2>
+<p>A digital bullet journal. Like a paper bujo, it follows how I actually
+plan: quarters break down into months, months into weeks, and each level
+has its own habits and goals. Day to day, I use it to check off daily and
+weekly habits, track weekly goals, and keep a journal. It runs self-hosted
+in Docker, and I use it myself.</p>
+<h2 id="the-problem">The problem</h2>
+<p>A bullet journal is personal by design. You shape the layout to fit how
+you think, and most people prefer pen and paper for exactly that reason. I
+wanted that same flexibility, built with the tools I know best. Off-the-shelf
+planners each covered part of it, but none fit the way I plan, so I built
+my own. It also gives me a real project, with real requirements, for
+practicing the architecture and testing techniques I care about.</p>
+<p>It’s a permanent work in progress. Just like a paper bujo, I keep adding
+spreads and changing what’s there as my needs change.</p>
+<h2 id="my-role">My role</h2>
+<p>Sole developer: API, database, front end, tests, and deployment.</p>
+<h2 id="technically-interesting">Technically interesting</h2>
+<ul>
+<li><strong>Clean Architecture with CQRS.</strong> The API is split into Domain,
+Application, Infrastructure, and Presentation layers. Every use case is a
+MediatR command or query with its own handler, and requests are validated
+with FluentValidation. Domain events record what happened, so side
+effects stay out of the handlers.</li>
+<li><strong>Hand-written SQL on purpose.</strong> Persistence uses Dapper over PostgreSQL
+with versioned schema and stored-procedure scripts instead of an ORM. The
+queries stay explicit, and the database stays something I understand.</li>
+<li><strong>BDD at both ends.</strong> The API has Reqnroll functional tests that run
+against an in-memory test host. The UI has Cypress scenarios written in
+Gherkin for habits, weekly goals, journal entries, and login, using a
+stubbed API and a controllable clock.</li>
+<li><strong>No secrets in config.</strong> Database credentials and JWT settings come from
+HashiCorp Vault at startup.</li>
+</ul>
+</article></main></div></body></html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-z4jru4n3><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="An hourly background service that builds a personal weather history in Postgres, with secrets kept in Vault instead of config."><meta name="theme-color" content="#14171C"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://daagonzalez.com/projects/weather-collector/"><title>Weather Collector · Daniel Gonzalez</title><style>.crumb[data-astro-cid-5hz3dbe4]{margin-bottom:1.25rem}h1[data-astro-cid-5hz3dbe4]{margin-bottom:.75rem}.links[data-astro-cid-5hz3dbe4]{flex-wrap:wrap;gap:.75rem;margin:1.5rem 0 0;display:flex}.prose[data-astro-cid-5hz3dbe4]>h2:first-child{margin-top:0}
+</style><link rel="stylesheet" href="/_astro/BaseLayout.-Y0Qa-N8.css"></head><body data-astro-cid-z4jru4n3><a class="skip-link" href="#main" data-astro-cid-z4jru4n3>Skip to content</a><div class="shell" data-astro-cid-z4jru4n3><header class="rail" data-astro-cid-euxwtxot><a class="identity" href="/" data-astro-cid-euxwtxot><span class="name" data-astro-cid-euxwtxot>Daniel Gonzalez</span><span class="role" data-astro-cid-euxwtxot>Software Engineer</span></a><nav aria-label="Primary" data-astro-cid-euxwtxot><ul data-astro-cid-euxwtxot><li data-astro-cid-euxwtxot><a href="/" data-astro-cid-euxwtxot>Home</a></li><li data-astro-cid-euxwtxot><a href="/projects/" aria-current="page" data-astro-cid-euxwtxot>Projects</a></li><li data-astro-cid-euxwtxot><a href="/about/" data-astro-cid-euxwtxot>About</a></li><li data-astro-cid-euxwtxot><a href="/resume/" data-astro-cid-euxwtxot>Resume</a></li><li data-astro-cid-euxwtxot><a href="/contact/" data-astro-cid-euxwtxot>Contact</a></li></ul></nav></header><main id="main" data-astro-cid-z4jru4n3><section class="section" data-astro-cid-5hz3dbe4><p class="crumb" data-astro-cid-5hz3dbe4><a class="arrow-link" href="/projects/" data-astro-cid-5hz3dbe4>← Projects</a></p><h1 data-astro-cid-5hz3dbe4>Weather Collector</h1><p class="lede" data-astro-cid-5hz3dbe4>An hourly background service that builds a personal weather history in Postgres, with secrets kept in Vault instead of config.</p><ul class="tags" aria-label="Stack" data-astro-cid-5hz3dbe4><li data-astro-cid-5hz3dbe4>TypeScript</li><li data-astro-cid-5hz3dbe4>Node.js</li><li data-astro-cid-5hz3dbe4>PostgreSQL</li><li data-astro-cid-5hz3dbe4>Drizzle</li><li data-astro-cid-5hz3dbe4>Vault</li><li data-astro-cid-5hz3dbe4>React</li><li data-astro-cid-5hz3dbe4>Docker</li></ul></section><article class="section prose" data-astro-cid-5hz3dbe4><h2 id="what-it-is">What it is</h2>
+<p>A small service that, at the top of every hour, fetches current conditions
+for the places I care about and stores them in Postgres. Over time that
+builds a weather history I own. A companion React UI charts temperatures
+by location over a chosen time range.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Weather apps are good at right now and bad at “what was it like here last
+month?” I wanted my own long-term record, kept in a database I can query
+however I like.</p>
+<h2 id="my-role">My role</h2>
+<p>Sole developer: design, implementation, and deployment.</p>
+<h2 id="technically-interesting">Technically interesting</h2>
+<ul>
+<li><strong>Secrets never touch env vars or config files.</strong> At startup the service
+authenticates to HashiCorp Vault with AppRole, then reads the database
+credentials and the AccuWeather API key from KV v2. The only things in the
+environment are the Vault address and the AppRole IDs, and the policy only
+grants read access to this service’s own paths.</li>
+<li><strong>The domain object is the boundary.</strong> <code>WeatherReading</code> is the only code
+that knows both AccuWeather’s response shape and what gets persisted. The
+API client, the use case, and the repository each depend on it, not on
+each other, so a change on either side touches one file.</li>
+<li><strong>Easy on the API quota.</strong> Location keys are resolved ahead of time, so
+the hourly job doesn’t spend requests on location lookups.</li>
+</ul>
+</article></main></div></body></html>
