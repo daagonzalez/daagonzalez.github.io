@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectList from '../components/ProjectList.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.slice(0, 3);
+---
+
+<BaseLayout current="home">
+  <section class="section">
+    <p class="label">Software Engineer</p>
+    <h1>I build software that solves complex problems cleanly.</h1>
+    <p class="lede">
+      I'm Daniel Gonzalez, a software engineer focused on dependable systems and the tools
+      around them. Below is some of what I've built; the resume and contact details are a click
+      away.
+    </p>
+  </section>
+
+  <section class="section" aria-labelledby="featured-heading">
+    <h2 class="label" id="featured-heading">Selected projects</h2>
+    <ProjectList projects={featured} />
+    <p class="more"><a class="arrow-link" href="/projects/">All projects →</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    max-width: 22ch;
+    margin-bottom: 1rem;
+  }
+
+  .more {
+    margin: 1.5rem 0 0;
+  }
+</style>

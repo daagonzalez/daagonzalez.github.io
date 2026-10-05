@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout current="about" title="About" description="About Daniel Gonzalez.">
+  <section class="section">
+    <h1>About</h1>
+  </section>
+
+  <section class="section prose">
+    <p>
+      Hello! I'm Daniel Gonzalez, a software engineer with a knack for developing solutions to
+      complex problems. With a strong foundation in software development and a love for learning
+      new technologies, I try to build software that makes a real difference to the people using
+      it.
+    </p>
+    <h2>How I got here</h2>
+    <p>
+      I studied computer science at the University of Costa Rica and started at DAC Solutions in
+      2018, building a route and inventory app for truck drivers alongside its first user. In 2020
+      I joined Veterans United Home Loans, where I worked on .NET services, RabbitMQ integrations,
+      and a move to Kubernetes. Since October 2024 I've managed engineers there while staying
+      hands-on with system design and implementation.
+    </p>
+    <h2>What I'm into</h2>
+    <p>
+      I could talk for an hour about Domain-Driven Design and clean architecture: finding the
+      right boundaries, modeling a domain so the code reads like the business, and using domain
+      events so systems can react without being tightly coupled. That leads straight into
+      event-driven systems, which I've built at work with RabbitMQ and play with on the side with
+      Kafka.
+    </p>
+    <p>
+      I'm also a big believer in BDD. Most of my side projects have Gherkin scenarios that describe
+      behavior in plain language before any code is written. Lately I've been spending a lot of
+      time on AI-assisted development and how teams can use it well, not just quickly.
+    </p>
+    <p>
+      And since moving into management, I've come to love the people side as much as the code:
+      helping engineers grow, giving them room to own hard problems, and building a team that
+      enjoys working together.
+    </p>
+    <h2>Outside of work</h2>
+    <p>
+      Most of my time outside work goes to my family: our baby girl, born in July 2026, and Balto, our
+      five-year-old husky shepherd mix, who is convinced every walk should be twice as long. When I do get a quiet
+      hour, I'm usually building a small app for some corner of my own life. My bullet-journal app, a weather
+      logger, and a handful of trackers all started that way.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 {
+    font-size: 1.05rem;
+  }
+</style>

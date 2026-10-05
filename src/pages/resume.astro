@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experience = [
+  {
+    role: 'Software Engineering Manager',
+    company: 'Veterans United Home Loans',
+    dates: 'Oct 2024 — Present',
+    points: [
+      'Lead a team of 14 engineers that owns the internal UI platform engineering teams use to build loan data and workflow apps for loan teams.',
+      'Set the team\'s technical roadmap with Product and engineering leadership, including modernizing the Nx/Angular monorepo and adopting AI-assisted development.',
+      'Mentor 9 engineers across engineering and management roles, and run technical interviews and hiring decisions.',
+    ],
+  },
+  {
+    role: 'Software Engineer',
+    company: 'Veterans United Home Loans',
+    dates: 'Apr 2020 — Oct 2024',
+    points: [
+      'Migrated 6 applications from .NET Framework to .NET Core and 3 from VMs to Kubernetes, including APIs and RabbitMQ-based Windows services.',
+      'Acted as unofficial technical lead on a Realty Domain API built with Domain-Driven Design and domain events, so downstream systems handle side effects independently.',
+      'Built distributed integrations on RabbitMQ and SignalR, including orchestration services and workflow processors.',
+    ],
+  },
+  {
+    role: 'Full-Stack Developer',
+    company: 'DAC Solutions',
+    dates: 'Jan 2018 — Apr 2020',
+    points: [
+      'Helped design and build a route and inventory app for truck drivers with its first user, then grew it into a product used by more customers.',
+      'Built it with Node.js, Express, AngularJS and MySQL, deployed it on AWS, and shipped an Android build with Cordova.',
+    ],
+  },
+];
+
+const skills = [
+  { group: 'Languages', items: ['C#', 'TypeScript', 'JavaScript'] },
+  { group: 'Frameworks', items: ['.NET', 'Angular', 'RxJS', 'NgRx', 'Node.js', 'Express'] },
+  { group: 'Architecture', items: ['Domain-Driven Design', 'Clean Architecture', 'Event-Driven Architecture', 'REST APIs'] },
+  { group: 'Messaging', items: ['RabbitMQ', 'SignalR'] },
+  { group: 'Infrastructure', items: ['Kubernetes', 'Docker', 'AWS', 'Azure DevOps', 'GitHub', 'Octopus Deploy'] },
+  { group: 'Tooling', items: ['Nx'] },
+  { group: 'Data', items: ['SQL Server', 'MySQL', 'Redis'] },
+];
+
+const education = [{ degree: 'B.S. Computer Science', school: 'University of Costa Rica', dates: '2014 — 2018' }];
+---
+
+<BaseLayout current="resume" title="Resume" description="Resume of Daniel Gonzalez, software engineer.">
+  <section class="section">
+    <h1>Resume</h1>
+    <p class="lede">Experience and skills at a glance. The PDF has the full version.</p>
+    <a class="button" href="/resume.pdf" download>Download PDF</a>
+  </section>
+
+  <section class="section" aria-labelledby="exp-heading">
+    <h2 class="label" id="exp-heading">Experience</h2>
+    <ul class="entries">
+      {
+        experience.map((job) => (
+          <li>
+            <div class="entry-head">
+              <h3>
+                {job.role} <span class="at">· {job.company}</span>
+              </h3>
+              <span class="meta">{job.dates}</span>
+            </div>
+            <ul class="points">
+              {job.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="skills-heading">
+    <h2 class="label" id="skills-heading">Skills</h2>
+    <dl class="skills">
+      {
+        skills.map((s) => (
+          <div>
+            <dt class="meta">{s.group}</dt>
+            <dd>
+              <ul class="tags">
+                {s.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="section" aria-labelledby="edu-heading">
+    <h2 class="label" id="edu-heading">Education</h2>
+    <ul class="entries">
+      {
+        education.map((e) => (
+          <li>
+            <div class="entry-head">
+              <h3>
+                {e.degree} <span class="at">· {e.school}</span>
+              </h3>
+              <span class="meta">{e.dates}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .entries {
+    list-style: none;
+  }
+
+  .entries > li {
+    padding-block: 1rem;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .entries > li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+  }
+
+  .at {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .points {
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+    max-width: var(--measure);
+    color: var(--color-text-faint);
+  }
+
+  .skills {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .skills > div {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .skills dd {
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .skills > div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>
