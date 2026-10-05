@@ -1,25 +1,29 @@
 ---
 title: Planner App
-summary: A self-hosted planner for quarterly goals, monthly habits, weekly goals, and journaling, with a C# API and a React front end.
+summary: A digital bullet journal for quarterly goals, monthly habits, weekly goals, and journaling, with a C# API and a React front end.
 stack: ["C#", ".NET", "React", "TypeScript", "PostgreSQL", "Vault", "Docker"]
 order: 2
 ---
 
 ## What it is
 
-A personal planning app built around how I actually plan: quarters break
-down into months, months into weeks, and each level has its own habits and
-goals. Day to day, I use it to check off daily and weekly habits, track
-weekly goals, and keep a journal. It runs self-hosted in Docker, and I use
-it myself.
+A digital bullet journal. Like a paper bujo, it follows how I actually
+plan: quarters break down into months, months into weeks, and each level
+has its own habits and goals. Day to day, I use it to check off daily and
+weekly habits, track weekly goals, and keep a journal. It runs self-hosted
+in Docker, and I use it myself.
 
 ## The problem
 
-Off-the-shelf planners and habit trackers each covered part of what I
-wanted, but none followed the quarter → month → week structure I plan in.
-Building my own fixed that, and it also gave me a real project, with real
-requirements, for practicing the architecture and testing techniques I care
-about.
+A bullet journal is personal by design. You shape the layout to fit how
+you think, and most people prefer pen and paper for exactly that reason. I
+wanted that same flexibility, built with the tools I know best. Off-the-shelf
+planners each covered part of it, but none fit the way I plan, so I built
+my own. It also gives me a real project, with real requirements, for
+practicing the architecture and testing techniques I care about.
+
+It's a permanent work in progress. Just like a paper bujo, I keep adding
+spreads and changing what's there as my needs change.
 
 ## My role
 
