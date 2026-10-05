@@ -1,10 +1,20 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import profile from '../assets/profile.webp';
 ---
 
 <BaseLayout current="about" title="About" description="About Daniel Gonzalez.">
-  <section class="section">
+  <section class="section header">
     <h1>About</h1>
+    <Image
+      class="portrait"
+      src={profile}
+      alt="Portrait of Daniel Gonzalez"
+      width={320}
+      height={330}
+      loading="eager"
+    />
   </section>
 
   <section class="section prose">
@@ -51,6 +61,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .portrait {
+    width: 8rem;
+    height: 8rem;
+    flex: none;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+  }
+
   h2 {
     font-size: 1.05rem;
   }
