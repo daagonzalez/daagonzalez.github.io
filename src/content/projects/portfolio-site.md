@@ -2,7 +2,7 @@
 title: Portfolio Site
 summary: This site — a static, content-driven portfolio built with Astro and a single design token sheet.
 stack: ["Astro", "TypeScript", "CSS"]
-order: 1
+order: 2
 link: https://daagonzalez.com
 repo: https://github.com/daagonzalez/daagonzalez.github.io
 ---
