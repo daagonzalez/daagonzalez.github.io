@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-z4jru4n3><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A self-hosted, simpler take on Jira. Kanban boards with hard WIP limits, server-enforced authorization, and automatic deploys to a Raspberry Pi."><meta name="theme-color" content="#14171C"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://daagonzalez.com/projects/project-tracker/"><title>Project Tracker · Daniel Gonzalez</title><style>.crumb[data-astro-cid-5hz3dbe4]{margin-bottom:1.25rem}h1[data-astro-cid-5hz3dbe4]{margin-bottom:.75rem}.links[data-astro-cid-5hz3dbe4]{flex-wrap:wrap;gap:.75rem;margin:1.5rem 0 0;display:flex}.prose[data-astro-cid-5hz3dbe4]>h2:first-child{margin-top:0}
+</style><link rel="stylesheet" href="/_astro/BaseLayout.-Y0Qa-N8.css"></head><body data-astro-cid-z4jru4n3><a class="skip-link" href="#main" data-astro-cid-z4jru4n3>Skip to content</a><div class="shell" data-astro-cid-z4jru4n3><header class="rail" data-astro-cid-euxwtxot><a class="identity" href="/" data-astro-cid-euxwtxot><span class="name" data-astro-cid-euxwtxot>Daniel Gonzalez</span><span class="role" data-astro-cid-euxwtxot>Software Engineer</span></a><nav aria-label="Primary" data-astro-cid-euxwtxot><ul data-astro-cid-euxwtxot><li data-astro-cid-euxwtxot><a href="/" data-astro-cid-euxwtxot>Home</a></li><li data-astro-cid-euxwtxot><a href="/projects/" aria-current="page" data-astro-cid-euxwtxot>Projects</a></li><li data-astro-cid-euxwtxot><a href="/about/" data-astro-cid-euxwtxot>About</a></li><li data-astro-cid-euxwtxot><a href="/resume/" data-astro-cid-euxwtxot>Resume</a></li><li data-astro-cid-euxwtxot><a href="/contact/" data-astro-cid-euxwtxot>Contact</a></li></ul></nav></header><main id="main" data-astro-cid-z4jru4n3><section class="section" data-astro-cid-5hz3dbe4><p class="crumb" data-astro-cid-5hz3dbe4><a class="arrow-link" href="/projects/" data-astro-cid-5hz3dbe4>← Projects</a></p><h1 data-astro-cid-5hz3dbe4>Project Tracker</h1><p class="lede" data-astro-cid-5hz3dbe4>A self-hosted, simpler take on Jira. Kanban boards with hard WIP limits, server-enforced authorization, and automatic deploys to a Raspberry Pi.</p><ul class="tags" aria-label="Stack" data-astro-cid-5hz3dbe4><li data-astro-cid-5hz3dbe4>TypeScript</li><li data-astro-cid-5hz3dbe4>Fastify</li><li data-astro-cid-5hz3dbe4>Drizzle</li><li data-astro-cid-5hz3dbe4>PostgreSQL</li><li data-astro-cid-5hz3dbe4>React</li><li data-astro-cid-5hz3dbe4>Vite</li><li data-astro-cid-5hz3dbe4>Playwright</li><li data-astro-cid-5hz3dbe4>Docker</li></ul><p class="links" data-astro-cid-5hz3dbe4><a class="button" href="https://github.com/daagonzalez/project-tracker" data-astro-cid-5hz3dbe4>Source</a></p></section><article class="section prose" data-astro-cid-5hz3dbe4><h2 id="what-it-is">What it is</h2>
+<p>A small Kanban project tracker. Each project has one board of columns and
+tickets. Tickets carry a description, comments, labels, story points, an
+assignee, and links to things like pull requests. Columns can have a WIP
+limit, and it is a hard one: a move that would exceed it is rejected. It
+runs on a Raspberry Pi at home, deployed automatically on every merge to
+<code>main</code>, and I use it to track my own projects.</p>
+<h2 id="the-problem">The problem</h2>
+<p>Jira does far more than I need, and hosted trackers want my data and a
+subscription for what is essentially a board and some tickets. I wanted
+something I could run myself and fully understand. It is also a deliberate
+exercise in building a small product the way I would want a team to: test
+first, with the rules enforced where they cannot be bypassed.</p>
+<h2 id="my-role">My role</h2>
+<p>Sole developer: API, database, front end, tests, CI, and deployment.</p>
+<h2 id="technically-interesting">Technically interesting</h2>
+<ul>
+<li><strong>Test-first, against a real database.</strong> Every behaviour started as a
+failing test. API tests use Vitest and Fastify’s <code>inject()</code> against a real
+Postgres, with no mocked database. Front-end tests use Playwright with the
+API mocked at the network edge, driving the UI by dragging, clicking, and
+typing. Authorization, WIP limits, and ordering are covered first.</li>
+<li><strong>One contract, checked from both sides.</strong> Zod schemas in a shared package
+define every API shape. API tests validate each response against them, and
+the Playwright mock fixtures are typed and validated against the same
+schemas, so the two suites cannot drift apart without a test failing.</li>
+<li><strong>Rules live on the server.</strong> Only members can see a project, and only the
+owner can delete it or manage members. WIP limits are checked on every
+move, and only a comment’s author can edit it. Every ticket change writes
+an event in the same transaction, and tickets are archived, never deleted.</li>
+<li><strong>Fractional-index ordering.</strong> Ticket order within a column uses
+fractional string keys, so dragging a ticket rewrites one row instead of
+renumbering the column.</li>
+<li><strong>Security without a framework doing it for me.</strong> Server-side sessions in
+an <code>HttpOnly</code>, <code>Secure</code>, <code>SameSite=Lax</code> cookie, stored hashed in Postgres
+so they can be revoked instantly. Passwords use argon2id, with CSRF
+protection and login rate limiting. There is no public sign-up: users are
+created from a CLI command. Markdown renders without raw HTML.</li>
+<li><strong>One container, one origin.</strong> A single multi-stage Docker image serves
+both the API and the built front end, runs as non-root, and migrates the
+database on startup. That removes CORS and keeps cookies first-party.</li>
+<li><strong>CI and automatic deploys.</strong> CI runs lint, both test suites, <code>npm audit</code>,
+and a Docker build as separate jobs. A green merge to <code>main</code> redeploys the
+Pi over HTTPS.</li>
+</ul>
+</article></main></div></body></html>
