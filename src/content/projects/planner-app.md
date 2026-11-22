@@ -2,7 +2,7 @@
 title: Planner App
 summary: A digital bullet journal for quarterly goals, monthly habits, weekly goals, and journaling, with a C# API and a React front end.
 stack: ["C#", ".NET", "React", "TypeScript", "PostgreSQL", "Vault", "Docker"]
-order: 2
+order: 3
 ---
 
 ## What it is

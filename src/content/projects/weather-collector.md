@@ -2,7 +2,7 @@
 title: Weather Collector
 summary: An hourly background service that builds a personal weather history in Postgres, with secrets kept in Vault instead of config.
 stack: ["TypeScript", "Node.js", "PostgreSQL", "Drizzle", "Vault", "React", "Docker"]
-order: 3
+order: 4
 ---
 
 ## What it is
